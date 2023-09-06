@@ -8,7 +8,7 @@ const Article = ({ article, summary = false }) => {
   return (
     <article>
       <header>
-        <h2 className="text-xl text-blue-700 font-semibold">
+        <h2 className="text-xl text-blue-800 font-semibold">
           <Link to={routes.article({ id: article.id })}>{article.title}</Link>
         </h2>
       </header>
