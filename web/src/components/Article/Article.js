@@ -1,5 +1,8 @@
 import { Link, routes } from '@redwoodjs/router'
 
+import CommentsCell from 'src/components/CommentCell'
+import CommentForm from 'src/components/CommentForm'
+
 const truncate = (text, length) => {
   return text.substring(0, length) + '...'
 }
