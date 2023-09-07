@@ -18,6 +18,14 @@ const Article = ({ article, summary = false }) => {
       <div className="mt-2 text-gray-900 font-light">
         {summary ? truncate(article.body, 100) : article.body}
       </div>
+      {!summary && (
+        <div className="mt-12">
+          <CommentForm />
+          <div className="mt-12">
+            <CommentsCell />
+          </div>
+        </div>
+      )}
     </article>
   )
 }
