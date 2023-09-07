@@ -19,7 +19,8 @@ describe('CommentsCell', () => {
   it('renders Empty successfully', async () => {
     expect(() => {
       render(<Empty />)
-    }).not.toThrow()
+      expect(screen.getByText('No comments yet')).toBeInTheDocument()
+    })
   })
 
   it('renders Failure successfully', async () => {

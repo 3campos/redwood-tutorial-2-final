@@ -15,3 +15,9 @@ export const Comment = {
     return db.comment.findUnique({ where: { id: root?.id } }).post()
   },
 }
+
+export const createComment = ({ input }) => {
+  return db.comment.create({
+    data: input,
+  })
+}
