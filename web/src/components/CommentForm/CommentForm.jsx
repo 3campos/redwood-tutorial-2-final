@@ -31,12 +31,13 @@ const CommentForm = ({ postId }) => {
       setHasPosted(true)
       toast.success('Thank you for your comment!')
     },
-    refetchQueries: [{ query: CommentsQuery }],
+    refetchQueries: [{ query: CommentsQuery, variables: { postId } }],
   })
 
   const onSubmit = (input) => {
     createComment({ variables: { input: { postId, ...input } } })
   }
+
   return (
     <div className={hasPosted ? 'hidden' : ''}>
       <h3 className="font-light text-lg text-gray-600">Leave a Comment</h3>
