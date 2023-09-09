@@ -26,6 +26,11 @@ export const defaultView = () => {
 }
 
 export const moderatorView = () => {
+  mockCurrentUser({
+    id: 1,
+    email: 'moderator@moderator.com',
+    roles: 'moderator',
+  })
   return (
     <Comment
       comment={{
