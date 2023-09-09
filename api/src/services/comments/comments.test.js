@@ -1,6 +1,8 @@
+import { AuthenticationError, ForbiddenError } from '@redwoosjs/graphql-server'
+
 import { db } from 'src/lib/db'
 
-import { comments, createComment } from './comments'
+import { comments, createComment, deleteComment } from './comments'
 
 // Generated boilerplate tests do not account for all circumstances
 // and can fail without adjustments, e.g. Float.
@@ -39,3 +41,27 @@ describe('comments', () => {
     expect(comment.createdAt).not.toEqual(null)
   })
 })
+
+scenario('allows a moderator to delete a comment', async (scenario) => {
+  mockCurrentUser({ roles: ['moderator'] })
+
+  const comment = await deleteComment({
+    id: scenario.comment.jane.id,
+  })
+  expect(comment.id).toEqual(scenario.comment.jane.id)
+
+  const result = await comments({ postId: scenario.comment.jane.id })
+  expect(result.length).toEqual(0)
+})
+
+scenario(
+  'does not allow a non-moderator to delete a comment',
+  async (scenario) => {
+    mockCurrentUser({ roles: 'user' })
+    expect(() =>
+      deleteComment({
+        id: scenario.comment.jane.id,
+      })
+    ).toThrow(ForbiddenError)
+  }
+)
