@@ -1,12 +1,13 @@
+// import { requireAuth } from 'src/lib/auth'
+// import { requireAuth } from 'src/lib/auth'
 import { db } from 'src/lib/db'
-import {db} from 'src/lib/db'
 
 export const comments = ({ postId }) => {
   return db.comment.findMany({ where: { postId } })
 }
 
 export const comment = ({ id }) => {
-  requireAuth({roles:'moderator'})
+  requireAuth({ roles: 'moderator' })
   return db.comment.findUnique({
     where: { id },
   })
